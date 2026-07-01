@@ -1,0 +1,25 @@
+{
+  "account": "accounts/113920729731089913041",
+  "location": "locations/12004699577924942607",
+  "place_id": "ChIJecT8F9-qcawRBHPLWk3Muvw",
+  "cid": "18211092675833852676",
+  "maps_uri": "https://maps.google.com/maps?cid=18211092675833852676",
+  "new_review_uri": "https://search.google.com/local/writereview?placeid=ChIJecT8F9-qcawRBHPLWk3Muvw",
+  "average_rating": 4.9,
+  "total_review_count": 19,
+  "primary_category": "Tree service",
+  "additional_categories": ["Landscaper", "Pond contractor", "Utility contractor", "Earth works company", "Excavating contractor", "Debris removal service"],
+  "hours": [
+    {"day": "Monday",    "open": "07:00", "close": "18:00"},
+    {"day": "Tuesday",   "open": "07:00", "close": "18:00"},
+    {"day": "Wednesday", "open": "07:00", "close": "18:00"},
+    {"day": "Thursday",  "open": "07:00", "close": "18:00"},
+    {"day": "Friday",    "open": "07:00", "close": "18:00"},
+    {"day": "Saturday",  "open": null,    "close": null},
+    {"day": "Sunday",    "open": null,    "close": null}
+  ],
+  "service_area_cities": ["Burns","Franklin","Oak Hill","Brentwood","Nashville","Christiana","Eagleville","Belle Meade","Nolensville","Forest Hills","Triune","Columbia","Culleoka","Fairview","Lewisburg","Chapel Hill","Leipers Fork","Thompson's Station","College Grove","Green Hills"],
+  "phone": "(615) 900-4501",
+  "website": "https://claiborneservicesllc.com/",
+  "description": "Claiborne Services LLC is a licensed and insured local company offering tree services, land clearing, excavation, and more. Professional outcomes with a personal touch."
+}

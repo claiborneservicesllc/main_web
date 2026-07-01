@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://claiborneservicesllc.pplx.app/sitemap.xml
