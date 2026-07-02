@@ -256,6 +256,9 @@ img{max-width:100%;display:block}
 .field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--forest);border-color:var(--forest)}
 .field textarea{min-height:120px;resize:vertical}
 
+/* Google Places autocomplete dropdown — keep above header, mobile bar, lightbox */
+.pac-container{z-index:4000!important;border-radius:9px;margin-top:4px;font-family:inherit;border:1px solid var(--line);box-shadow:var(--shadow-lg)}
+
 /* map */
 .map-embed{width:100%;border:0;border-radius:var(--radius);box-shadow:var(--shadow);min-height:380px}
 
