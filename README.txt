@@ -67,6 +67,34 @@ Phone number appears throughout — global find-and-replace on
 (615) 900-4501 if it ever needs to update.
 
 --------------------------------------------------------------------
+Automated review count (GitHub Action)
+--------------------------------------------------------------------
+.github/workflows/update-reviews.yml runs daily (and can be triggered
+manually from the Actions tab) to refresh the "4.9 on Google - 19 reviews"
+badge and matching JSON-LD aggregateRating block on every page, plus the
+average_rating/total_review_count fields in data/gbp_meta.json and
+data/gbp_reviews.json. It calls the Places API (New) Place Details endpoint
+for just the `rating` and `userRatingCount` fields (Atmosphere Data tier --
+a few cents per 1,000 calls; at ~30 calls/month this is effectively free
+and comes out of the standard $200/month Google Cloud credit).
+
+One-time setup:
+  1. In Google Cloud Console, create a NEW API key restricted to the
+     Places API only, with NO website/HTTP-referrer restriction (this key
+     runs from GitHub's servers, not a browser -- keep it separate from
+     the client-side autocomplete key used in contact.html).
+  2. In the GitHub repo: Settings -> Secrets and variables -> Actions ->
+     New repository secret, named GOOGLE_PLACES_API_KEY, value = that key.
+  3. That's it -- the workflow runs on its own schedule from then on.
+
+This script intentionally does NOT refresh the individual review
+cards/text in data/gbp_reviews.json (new reviews, reply text, reviewer
+photos) -- Place Details (New) only returns up to 5 recent reviews without
+owner-reply text. Re-exporting the full review list requires the Google
+Business Profile API instead (OAuth, verified ownership), a heavier,
+separate setup from this daily count/rating refresh.
+
+--------------------------------------------------------------------
 Questions
 --------------------------------------------------------------------
 Site content owner:  Shawn Claiborne
