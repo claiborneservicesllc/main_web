@@ -1,0 +1,66 @@
+name: Update Google reviews
+
+# Refreshes the review data on the site twice daily (12 AM and 12 PM Central):
+#   1. Always: the "4.9 on Google · 19 reviews" badge + JSON-LD aggregateRating
+#      block on every page, via the Places API (New) -- simple, API-key auth,
+#      no approval needed. Runs first so the count/rating never goes stale.
+#   2. If configured: the FULL review cards on reviews.html (new reviews,
+#      text, star ratings, owner replies) via the Google Business Profile
+#      API -- requires OAuth secrets AND a one-time Google access-request
+#      approval. See README.txt "Automated review page" section for setup.
+#      Until those secrets exist, this step logs a message and no-ops
+#      cleanly -- it will NOT fail the workflow.
+#
+# Because step 2 runs after step 1 in the same job, once it's active its
+# (more complete) numbers simply overwrite step 1's -- no conflicting
+# commits, no race condition.
+#
+# Schedule note: GitHub Actions cron is fixed UTC with no DST awareness.
+# 05:00/17:00 UTC = 12:00 AM/PM Central Daylight Time (spring/summer).
+# During Central Standard Time (roughly Nov-Mar) this drifts to 11 PM/11 AM
+# Central -- a ~1hr seasonal shift that's standard practice to accept rather
+# than maintain two cron schedules.
+
+"on":
+  schedule:
+    - cron: "0 5,17 * * *"   # ~12:00 AM and 12:00 PM Central (see note above)
+  workflow_dispatch: {}       # allows manually triggering a run from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update-reviews:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Refresh review count/rating (Places API)
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+        run: python3 scripts/update_review_count.py
+
+      - name: Refresh full review cards (Business Profile API, if configured)
+        env:
+          GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+          GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+          GOOGLE_OAUTH_REFRESH_TOKEN: ${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}
+        run: python3 scripts/update_reviews_full.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No review changes -- nothing to commit."
+          else
+            git add -A
+            git commit -m "chore: update Google reviews [automated]"
+            git push
+          fi
