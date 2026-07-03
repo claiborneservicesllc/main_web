@@ -40,6 +40,24 @@ JSONLD_RATING_RE = re.compile(
     r'"aggregateRating": \{"@type": "AggregateRating", "ratingValue": "[\d.]+", "reviewCount": "\d+"'
 )
 
+# Additional hardcoded spots found on index.html / reviews.html that the simple
+# trustbar badge regex above does NOT cover -- title tags, headings, meta
+# descriptions, the "eyebrow" link, and the gbp-badge component's aria-label
+# and inner spans.
+STARS_ON_GOOGLE_RE = re.compile(r"[\d.]+ Stars on Google(?!\s*&middot;)")
+EYEBROW_RE = re.compile(r"[\d.]+ Stars on Google &middot; \d+ Reviews")
+META_DESC_RE = re.compile(
+    r"Read \d+ verified Google reviews for Claiborne Services LLC — [\d.]+ stars\."
+)
+HERO_SUB_RE = re.compile(
+    r"Based on \d+ verified Google reviews from across Middle Tennessee\."
+)
+GBP_ARIA_RE = re.compile(
+    r'aria-label="View Claiborne Services on Google — [\d.]+ stars, \d+ reviews"'
+)
+GBP_BADGE_TEXT_RE = re.compile(r'<span class="gbp-badge-text"><strong>[\d.]+</strong></span>')
+GBP_BADGE_COUNT_RE = re.compile(r'<span class="gbp-badge-count">\(\d+ reviews\)</span>')
+
 
 def fetch_rating(place_id, api_key):
     url = "https://places.googleapis.com/v1/places/" + place_id
@@ -79,6 +97,27 @@ def update_html_files(rating_str, count):
             new_content = JSONLD_RATING_RE.sub(
                 '"aggregateRating": {"@type": "AggregateRating", "ratingValue": "%s", "reviewCount": "%d"' % (rating_str, count),
                 new_content,
+            )
+            new_content = STARS_ON_GOOGLE_RE.sub("%s Stars on Google" % rating_str, new_content)
+            new_content = EYEBROW_RE.sub(
+                "%s Stars on Google &middot; %d Reviews" % (rating_str, count), new_content
+            )
+            new_content = META_DESC_RE.sub(
+                "Read %d verified Google reviews for Claiborne Services LLC — %s stars." % (count, rating_str),
+                new_content,
+            )
+            new_content = HERO_SUB_RE.sub(
+                "Based on %d verified Google reviews from across Middle Tennessee." % count, new_content
+            )
+            new_content = GBP_ARIA_RE.sub(
+                'aria-label="View Claiborne Services on Google — %s stars, %d reviews"' % (rating_str, count),
+                new_content,
+            )
+            new_content = GBP_BADGE_TEXT_RE.sub(
+                '<span class="gbp-badge-text"><strong>%s</strong></span>' % rating_str, new_content
+            )
+            new_content = GBP_BADGE_COUNT_RE.sub(
+                '<span class="gbp-badge-count">(%d reviews)</span>' % count, new_content
             )
             if new_content != content:
                 with open(path, "w", encoding="utf-8") as f:

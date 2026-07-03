@@ -47,6 +47,22 @@ JSONLD_RATING_RE = re.compile(
 REVIEWS_COUNT_TEXT_RE = re.compile(r"\(\d+ reviews\)")
 REVIEWS_COUNT_ARIA_RE = re.compile(r"— [\d.]+ stars, \d+ reviews\"")
 
+# Same additional hardcoded spots handled in update_review_count.py -- kept in
+# sync here so the full refresh is a superset of the count-only refresh.
+STARS_ON_GOOGLE_RE = re.compile(r"[\d.]+ Stars on Google(?!\s*&middot;)")
+EYEBROW_RE = re.compile(r"[\d.]+ Stars on Google &middot; \d+ Reviews")
+META_DESC_RE = re.compile(
+    r"Read \d+ verified Google reviews for Claiborne Services LLC — [\d.]+ stars\."
+)
+HERO_SUB_RE = re.compile(
+    r"Based on \d+ verified Google reviews from across Middle Tennessee\."
+)
+GBP_ARIA_RE = re.compile(
+    r'aria-label="View Claiborne Services on Google — [\d.]+ stars, \d+ reviews"'
+)
+GBP_BADGE_TEXT_RE = re.compile(r'<span class="gbp-badge-text"><strong>[\d.]+</strong></span>')
+GBP_BADGE_COUNT_RE = re.compile(r'<span class="gbp-badge-count">\(\d+ reviews\)</span>')
+
 
 def get_access_token(client_id, client_secret, refresh_token):
     data = urllib.parse.urlencode({
@@ -169,6 +185,25 @@ def update_sitewide_badges(rating_str, count):
             new_content = JSONLD_RATING_RE.sub(
                 f'"aggregateRating": {{"@type": "AggregateRating", "ratingValue": "{rating_str}", "reviewCount": "{count}"',
                 new_content,
+            )
+            new_content = STARS_ON_GOOGLE_RE.sub(f"{rating_str} Stars on Google", new_content)
+            new_content = EYEBROW_RE.sub(f"{rating_str} Stars on Google &middot; {count} Reviews", new_content)
+            new_content = META_DESC_RE.sub(
+                f"Read {count} verified Google reviews for Claiborne Services LLC — {rating_str} stars.",
+                new_content,
+            )
+            new_content = HERO_SUB_RE.sub(
+                f"Based on {count} verified Google reviews from across Middle Tennessee.", new_content
+            )
+            new_content = GBP_ARIA_RE.sub(
+                f'aria-label="View Claiborne Services on Google — {rating_str} stars, {count} reviews"',
+                new_content,
+            )
+            new_content = GBP_BADGE_TEXT_RE.sub(
+                f'<span class="gbp-badge-text"><strong>{rating_str}</strong></span>', new_content
+            )
+            new_content = GBP_BADGE_COUNT_RE.sub(
+                f'<span class="gbp-badge-count">({count} reviews)</span>', new_content
             )
             if fname == "reviews.html":
                 new_content = REVIEWS_COUNT_TEXT_RE.sub(f"({count} reviews)", new_content)
