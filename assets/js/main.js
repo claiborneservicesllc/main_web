@@ -102,8 +102,38 @@
   // Contact form handler — POSTs to Formspree
   var form = document.querySelector('.quote-form');
   if (form) {
+    // Accepts xxx-xxx-xxxx or (xxx)xxx-xxxx / (xxx) xxx-xxxx
+    var PHONE_RE = /^(\d{3}-\d{3}-\d{4}|\(\d{3}\)\s?\d{3}-\d{4})$/;
+    var phoneField = form.querySelector('#phone');
+
+    function validatePhone() {
+      if (!phoneField) return true;
+      var wrap = phoneField.closest('.field');
+      var value = phoneField.value.trim();
+      var valid = PHONE_RE.test(value);
+      if (wrap) wrap.classList.toggle('has-error', !valid);
+      phoneField.setAttribute('aria-invalid', valid ? 'false' : 'true');
+      return valid;
+    }
+
+    if (phoneField) {
+      phoneField.addEventListener('blur', function () {
+        if (phoneField.value.trim()) validatePhone();
+      });
+      phoneField.addEventListener('input', function () {
+        var wrap = phoneField.closest('.field');
+        if (wrap && wrap.classList.contains('has-error')) validatePhone();
+      });
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+
+      if (!validatePhone()) {
+        if (phoneField) phoneField.focus();
+        return;
+      }
+
       var successNote = form.querySelector('.form-success');
       var errorNote = form.querySelector('.form-error');
       var submitBtn = form.querySelector('button[type="submit"]');
