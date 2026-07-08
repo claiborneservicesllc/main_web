@@ -1,0 +1,37 @@
+name: Notify IndexNow of site changes
+
+# Pings IndexNow (which relays to Bing and other participating engines)
+# with the full sitemap URL list whenever the site changes, so updates
+# get picked up faster than waiting for the next scheduled crawl.
+#
+# No secrets needed -- the IndexNow key is proven by hosting
+# 0f6f2c5e79b3453cba4647aaecd50992.txt at the domain root, which is
+# already committed in this repo.
+#
+# Triggers on:
+#   - any push to main that touches an .html file or sitemap.xml
+#     (covers manual uploads AND the automated review-sync commits)
+#   - manual "Run workflow" from the Actions tab
+
+"on":
+  push:
+    branches: [main]
+    paths:
+      - "**.html"
+      - "sitemap.xml"
+  workflow_dispatch: {}
+
+jobs:
+  indexnow-ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Submit sitemap URLs to IndexNow
+        run: python3 scripts/indexnow_ping.py
