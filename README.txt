@@ -139,4 +139,32 @@ Schedule note: GitHub Actions cron is fixed UTC with no daylight-saving
 awareness. The workflow is set to 05:00/17:00 UTC, which is 12:00 AM/PM
 Central Daylight Time (spring-summer). During Central Standard Time
 (roughly Nov-Mar) this drifts about an hour to 11 PM/11 AM Central --
-a small seasonal shift
+a small seasonal shift that's normal to accept rather than maintain two
+separate cron schedules.
+
+--------------------------------------------------------------------
+IndexNow (GitHub Action)
+--------------------------------------------------------------------
+.github/workflows/indexnow-ping.yml notifies IndexNow (which relays to
+Bing and other participating search engines) whenever the site changes,
+so updates get crawled faster than waiting for the next scheduled visit.
+
+Triggers automatically on any push to main that touches an .html file
+or sitemap.xml -- this covers both manual uploads and the automated
+review-sync commits from update-reviews.yml. Can also be run manually
+from the Actions tab.
+
+No GitHub secrets required. The key (0f6f2c5e79b3453cba4647aaecd50992)
+is proven by hosting 0f6f2c5e79b3453cba4647aaecd50992.txt at the domain
+root -- that file is already in this repo and must stay in place. If the
+key is ever regenerated in Bing Webmaster Tools, update both the key
+file's name/contents AND the KEY constant in scripts/indexnow_ping.py to
+match.
+
+--------------------------------------------------------------------
+Questions
+--------------------------------------------------------------------
+Site content owner:  Shawn Claiborne
+Email:               shawn@claiborneservicesllc.com
+Phone:               (615) 900-4501
+
