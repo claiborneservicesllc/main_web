@@ -8,23 +8,43 @@
 <link rel="canonical" href="https://claiborneservicesllc.com/faq.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Claiborne Services LLC">
-<meta property="og:title" content="FAQs">
+<meta property="og:title" content="Frequently Asked Questions | Claiborne Services LLC">
 <meta property="og:description" content="Answers to common questions about tree removal cost, insurance, equipment, scheduling, stump grinding, and land clearing in Middle Tennessee.">
 <meta property="og:url" content="https://claiborneservicesllc.com/faq.html">
 <meta property="og:image" content="https://claiborneservicesllc.com/assets/img/og-default.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FAQs">
+<meta name="twitter:title" content="Frequently Asked Questions | Claiborne Services LLC">
 <meta name="twitter:description" content="Answers to common questions about tree removal cost, insurance, equipment, scheduling, stump grinding, and land clearing in Middle Tennessee.">
 <meta name="twitter:image" content="https://claiborneservicesllc.com/assets/img/og-default.jpg">
-<!-- Google tag (gtag.js) — replace G-XXXXXXXXXX with your real GA4 Measurement ID -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<!-- Google Consent Mode: defaults set before gtag.js loads -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied'
+  });
+</script>
+<!-- Google tag (gtag.js) — GA4 Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5PKEJRFZXC"></script>
+<script>
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+  gtag('config', 'G-5PKEJRFZXC');
+</script>
+<!-- Fires when a user accepts the cookie/consent banner -->
+<script>
+  function allConsentGranted() {
+    gtag('consent', 'update', {
+      'ad_user_data': 'granted',
+      'ad_personalization': 'granted',
+      'ad_storage': 'granted',
+      'analytics_storage': 'granted'
+    });
+  }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -196,7 +216,7 @@
   </div>
   <div class="footer-bottom">
     <div class="container">
-      <span>&copy; 2025 Claiborne Services LLC. All rights reserved. License #TN-Pending &middot; Insured. &middot; <a href="about.html#bruno" class="footer-bruno-link">CEO Bruno approves this site.</a></span>
+      <span>&copy; 2026 Claiborne Services LLC. All rights reserved. License #TN-Pending &middot; Insured. &middot; <a href="about.html#bruno" class="footer-bruno-link">CEO Bruno approves this site.</a></span>
       <span><a href="sitemap.xml">Sitemap</a></span>
     </div>
   </div>
@@ -207,5 +227,96 @@
   <a class="quote" href="contact.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Get a Quote</a>
 </nav>
 <script src="assets/js/main.js" defer></script>
+<img src="https://tracker.metricool.com/c3po.jpg?hash=a8e5cc2537897bbc6042bbb77b1a3784"/>
+<!-- Cookie Consent Banner -->
+<div id="cc-banner" class="cc-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
+  <div class="cc-banner__text">
+    We use cookies to understand site traffic and improve your experience. You can accept or decline analytics cookies at any time. <a href="/privacy-policy.html" style="color:#9cd3ff;">Learn more</a>.
+  </div>
+  <div class="cc-banner__actions">
+    <button type="button" class="cc-btn cc-btn--decline" onclick="ccDecline()">Decline</button>
+    <button type="button" class="cc-btn cc-btn--accept" onclick="ccAccept()">Accept All</button>
+  </div>
+</div>
+<style>
+  .cc-banner {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: none;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 20px;
+    background: #1a1a1a;
+    color: #f5f5f5;
+    font-family: inherit;
+    font-size: 14px;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.25);
+  }
+  .cc-banner.cc-banner--visible { display: flex; }
+  .cc-banner__text { flex: 1 1 320px; line-height: 1.5; }
+  .cc-banner__actions { display: flex; gap: 10px; flex: 0 0 auto; }
+  .cc-btn {
+    padding: 10px 18px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .cc-btn--decline { background: transparent; border-color: #888; color: #f5f5f5; }
+  .cc-btn--decline:hover { background: rgba(255,255,255,0.08); }
+  .cc-btn--accept { background: #2e7d32; color: #fff; }
+  .cc-btn--accept:hover { background: #276b2b; }
+  @media (max-width: 520px) {
+    .cc-banner { flex-direction: column; align-items: stretch; text-align: center; }
+    .cc-banner__actions { justify-content: center; }
+  }
+</style>
+<script>
+  (function() {
+    var STORAGE_KEY = 'cc_consent';
+
+    function showBanner() {
+      var el = document.getElementById('cc-banner');
+      if (el) el.classList.add('cc-banner--visible');
+    }
+    function hideBanner() {
+      var el = document.getElementById('cc-banner');
+      if (el) el.classList.remove('cc-banner--visible');
+    }
+
+    window.ccAccept = function() {
+      localStorage.setItem(STORAGE_KEY, 'granted');
+      if (typeof allConsentGranted === 'function') allConsentGranted();
+      hideBanner();
+    };
+    window.ccDecline = function() {
+      localStorage.setItem(STORAGE_KEY, 'denied');
+      if (typeof gtag === 'function') {
+        gtag('consent', 'update', {
+          'ad_user_data': 'denied',
+          'ad_personalization': 'denied',
+          'ad_storage': 'denied',
+          'analytics_storage': 'denied'
+        });
+      }
+      hideBanner();
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var stored = localStorage.getItem(STORAGE_KEY);
+      if (stored === 'granted') {
+        if (typeof allConsentGranted === 'function') allConsentGranted();
+      } else if (stored !== 'denied') {
+        showBanner();
+      }
+    });
+  })();
+</script>
 </body>
 </html>
