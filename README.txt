@@ -37,7 +37,7 @@ File map
 index.html                 Homepage
 about.html                 About / family story
 contact.html               Contact + quote form
-pricing.html               Master rate card
+pricing.html                Master rate card
 services/*.html            Individual service pages
 service-area/*.html        City / area landing pages
 faq.html, financing.html   Supporting pages
@@ -45,10 +45,8 @@ discounts.html             Community discount programs
 equipment.html             Equipment fleet
 insurance.html             Insurance / licensing
 gallery.html, reviews.html Media + testimonials
-partners.html              Trusted vendor partners
-projects.html, projects/   Recent project detail pages
-blog/                      Articles + tips
-es/index.html              Spanish landing page
+partners.html               Trusted vendor partners
+privacy-policy.html        Privacy policy
 assets/css/styles.css      All styles
 assets/js/main.js          Nav, lightbox, form handler
 assets/img/                Logos, favicons, banners, job photos
@@ -141,12 +139,4 @@ Schedule note: GitHub Actions cron is fixed UTC with no daylight-saving
 awareness. The workflow is set to 05:00/17:00 UTC, which is 12:00 AM/PM
 Central Daylight Time (spring-summer). During Central Standard Time
 (roughly Nov-Mar) this drifts about an hour to 11 PM/11 AM Central --
-a small seasonal shift that's normal to accept rather than maintain two
-separate cron schedules.
-
---------------------------------------------------------------------
-Questions
---------------------------------------------------------------------
-Site content owner:  Shawn Claiborne
-Email:               shawn@claiborneservicesllc.com
-Phone:               (615) 900-4501
+a small seasonal shift
