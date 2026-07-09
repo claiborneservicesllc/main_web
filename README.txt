@@ -162,6 +162,30 @@ file's name/contents AND the KEY constant in scripts/indexnow_ping.py to
 match.
 
 --------------------------------------------------------------------
+Blog (scheduled auto-publish)
+--------------------------------------------------------------------
+blog/ contains 12 finished posts, written up front. Only posts whose
+scheduled date has arrived are linked from blog/index.html and listed
+in sitemap.xml -- the rest sit in the repo unlinked until their date.
+
+Schedule lives in data/blog_schedule.json (slug, publish_date, and a
+"published" flag per post). .github/workflows/publish-blog-post.yml
+runs scripts/publish_blog_post.py once daily (not just on the 1st, so
+a single delayed cron run can't push a post a month late). When a post
+becomes due, the script adds its card to blog/index.html and its URL
+to sitemap.xml, then the workflow commits and pushes automatically.
+
+To add a 13th post later: write the HTML file in blog/ (use an existing
+post as a template for header/footer/schema), then add an entry to
+data/blog_schedule.json with "published": false and its publish_date.
+The daily workflow picks it up automatically once that date arrives --
+no other changes needed.
+
+Once a post publishes, the existing indexnow-ping.yml workflow (see
+above) picks up the sitemap.xml change automatically and notifies Bing
+the same day.
+
+--------------------------------------------------------------------
 Questions
 --------------------------------------------------------------------
 Site content owner:  Shawn Claiborne
