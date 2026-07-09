@@ -1,0 +1,47 @@
+name: Publish scheduled blog post
+
+# Checks daily whether any blog post's scheduled date has arrived, and if
+# so, adds its card to blog/index.html and its URL to sitemap.xml, then
+# commits. All 12 posts' HTML content already lives in blog/ -- this
+# workflow only makes a due post DISCOVERABLE, it never writes content.
+#
+# Runs DAILY (not just on the 1st) so a single delayed/missed cron run
+# can't push a post a full month late -- see scripts/publish_blog_post.py
+# for the "due" logic (publish_date <= today AND not already published).
+#
+# Once a post publishes, the existing indexnow-ping.yml workflow picks up
+# the sitemap.xml/HTML change automatically and notifies Bing.
+
+"on":
+  schedule:
+    - cron: "0 12 * * *"  # 6:00 AM Central (roughly, ignoring DST)
+  workflow_dispatch: {}
+
+jobs:
+  publish-blog-post:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run publish check
+        run: python3 scripts/publish_blog_post.py
+
+      - name: Commit and push if anything changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No changes -- nothing to publish today."
+          else
+            git add blog/index.html sitemap.xml data/blog_schedule.json
+            git commit -m "Auto-publish scheduled blog post"
+            git push
+          fi
