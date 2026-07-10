@@ -18,7 +18,7 @@
   --header-h:80px;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{
   margin:0;
   font-family:"DM Sans",system-ui,-apple-system,sans-serif;
@@ -36,6 +36,7 @@ p{margin:0 0 1rem}
 a{color:var(--forest);text-decoration:none}
 a:hover{text-decoration:underline}
 img{max-width:100%;display:block}
+html,body{overflow-x:clip}
 .container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
 .section{padding:72px 0}
 .section--tight{padding:48px 0}
@@ -285,12 +286,13 @@ img{max-width:100%;display:block}
 /* footer */
 .site-footer{background:var(--forest-dark);color:#cdd6cd;padding:56px 0 0}
 .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1.2fr;gap:32px}
+.footer-grid>div{min-width:0}
 .site-footer h4{color:#fff;font-size:1rem;margin-bottom:14px;letter-spacing:.02em}
 .site-footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 .site-footer a{color:#cdd6cd;font-size:.92rem}
 .site-footer a:hover{color:#fff}
 .footer-brand p{font-size:.92rem;color:#aebbae;margin-top:14px;max-width:34ch}
-.footer-social{display:flex;gap:12px;margin-top:16px}
+.footer-social{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
 .footer-social a{width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#fff}
 .footer-social a:hover{background:var(--orange)}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:44px;padding:20px 0;font-size:.82rem;color:#9aa79a}
@@ -347,6 +349,7 @@ img{max-width:100%;display:block}
   .topbar-tagline{display:none}
   .topbar-inner{justify-content:center}
 }
+@media(max-width:560px){.footer-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 /* Service-area community chips (additional towns under each county) */
