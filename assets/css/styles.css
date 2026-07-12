@@ -75,9 +75,13 @@ html,body{overflow-x:clip}
 .brand-logo{display:block;height:54px;width:auto;flex:0 0 auto}
 .brand-logo--footer{height:80px;width:80px;padding:6px;background:#fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.25);object-fit:contain}
 .brand--footer{gap:14px;align-items:center}
-.brand-tag{display:flex;align-items:center}
-@media(max-width:1480px){.brand-tag{display:none}}
-@media(max-width:640px){.brand-logo{height:50px}}
+.brand--footer .brand-sub{display:block}
+.brand--footer .brand-name{white-space:nowrap;max-width:none;font-size:1.08rem}
+.brand-text{display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0}
+.brand-name{font-weight:800;font-size:1.08rem;letter-spacing:-.01em;color:var(--forest-dark);white-space:nowrap;line-height:1.05}
+.brand-sub{font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--brown);line-height:1.2;white-space:nowrap}
+@media(max-width:640px){.brand-logo{height:46px}.brand{gap:9px}.brand-name{font-size:.98rem}}
+@media(max-width:374px){.brand-sub{display:none}.brand-name{font-size:.9rem}}
 .main-nav{display:flex;align-items:center;gap:1px}
 .main-nav a{color:var(--ink);font-weight:500;font-size:.9rem;padding:8px 7px;border-radius:8px;white-space:nowrap}
 .main-nav a:hover{background:var(--bg-alt);text-decoration:none;color:var(--forest)}
@@ -334,7 +338,7 @@ html,body{overflow-x:clip}
   .main-nav.open{display:flex;position:absolute;top:var(--header-h);left:0;right:0;flex-direction:column;background:#fff;border-bottom:1px solid var(--line);padding:12px;gap:2px;box-shadow:var(--shadow-lg);max-height:calc(100vh - var(--header-h) - 64px);overflow-y:auto;-webkit-overflow-scrolling:touch}
   .main-nav.open a{padding:12px}
   .main-nav.open .dropdown{display:flex;position:static;box-shadow:none;border:0;padding:0 0 0 14px}
-  .header-cta .btn--primary{padding:10px 14px;font-size:.88rem}
+  .header-cta{display:none}
   .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
   .stats{grid-template-columns:1fr;gap:30px}
   .gallery-grid{grid-template-columns:repeat(2,1fr)}
