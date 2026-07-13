@@ -195,7 +195,7 @@
       });
     });
     // Get a Quote CTA clicks
-    document.querySelectorAll('a[href*="contact.html"]').forEach(function (a) {
+    document.querySelectorAll('a[href*="contact"]').forEach(function (a) {
       a.addEventListener('click', function () {
         track('quote_cta_click', { label: (a.textContent || '').trim().slice(0, 40), source: location.pathname });
       });

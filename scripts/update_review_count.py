@@ -50,7 +50,7 @@ META_DESC_RE = re.compile(
     r"Read \d+ verified Google reviews for Claiborne Services LLC — [\d.]+ stars\."
 )
 HERO_SUB_RE = re.compile(
-    r"Based on \d+ verified Google reviews from across Middle Tennessee\."
+    r"Based on \d+ verified Google reviews from across the Franklin area\."
 )
 GBP_ARIA_RE = re.compile(
     r'aria-label="View Claiborne Services on Google — [\d.]+ stars, \d+ reviews"'
@@ -89,8 +89,12 @@ def update_html_files(rating_str, count):
             if not fname.endswith(".html"):
                 continue
             path = os.path.join(dirpath, fname)
-            with open(path, encoding="utf-8") as f:
-                content = f.read()
+            try:
+                with open(path, encoding="utf-8") as f:
+                    content = f.read()
+            except UnicodeDecodeError:
+                print("WARNING: skipping non-UTF-8 file: %s" % path, file=sys.stderr)
+                continue
             new_content = BADGE_RE.sub(
                 "<strong>%s</strong> on Google &middot; %d reviews" % (rating_str, count), content
             )
@@ -107,7 +111,7 @@ def update_html_files(rating_str, count):
                 new_content,
             )
             new_content = HERO_SUB_RE.sub(
-                "Based on %d verified Google reviews from across Middle Tennessee." % count, new_content
+                "Based on %d verified Google reviews from across the Franklin area." % count, new_content
             )
             new_content = GBP_ARIA_RE.sub(
                 'aria-label="View Claiborne Services on Google — %s stars, %d reviews"' % (rating_str, count),

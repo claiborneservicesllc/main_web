@@ -32,6 +32,8 @@ h1,h2,h3,h4{font-family:"DM Sans",sans-serif;line-height:1.12;color:var(--forest
 h1{font-size:clamp(2rem,4.6vw,3.4rem)}
 h2{font-size:clamp(1.6rem,3.2vw,2.4rem)}
 h3{font-size:1.3rem}
+h2:not(:first-child){margin-top:1.5em}
+h3:not(:first-child){margin-top:1.1em}
 p{margin:0 0 1rem}
 a{color:var(--forest);text-decoration:none}
 a:hover{text-decoration:underline}
@@ -80,8 +82,8 @@ html,body{overflow-x:clip}
 .brand-text{display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0}
 .brand-name{font-weight:800;font-size:1.08rem;letter-spacing:-.01em;color:var(--forest-dark);white-space:nowrap;line-height:1.05}
 .brand-sub{font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--brown);line-height:1.2;white-space:nowrap}
-@media(max-width:640px){.brand-logo{height:46px}.brand{gap:9px}.brand-name{font-size:.98rem}}
-@media(max-width:374px){.brand-sub{display:none}.brand-name{font-size:.9rem}}
+@media(max-width:640px){.site-header .brand-logo{height:46px}.site-header .brand{gap:9px}.site-header .brand-name{font-size:.98rem}}
+@media(max-width:374px){.site-header .brand-sub{display:none}.site-header .brand-name{font-size:.9rem}}
 .main-nav{display:flex;align-items:center;gap:1px}
 .main-nav a{color:var(--ink);font-weight:500;font-size:.9rem;padding:8px 7px;border-radius:8px;white-space:nowrap}
 .main-nav a:hover{background:var(--bg-alt);text-decoration:none;color:var(--forest)}

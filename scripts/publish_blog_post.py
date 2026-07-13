@@ -63,9 +63,9 @@ def add_to_blog_index(post):
       <span class="blog-card-img"><img src="../assets/img/jobs/{post["hero_img"]}" alt="{post["title"]}" loading="lazy"></span>
       <div class="blog-card-body">
         <p class="eyebrow">{post["category"]} &middot; {pub_date_human}</p>
-        <h3><a href="{post["slug"]}.html">{post["title"]}</a></h3>
+        <h3><a href="/blog/{post["slug"]}">{post["title"]}</a></h3>
         <p>{post["dek"]}</p>
-        <a class="more" href="{post["slug"]}.html">Read More &rarr;</a>
+        <a class="more" href="/blog/{post["slug"]}">Read More &rarr;</a>
       </div>
     </div>\n    '''
 
@@ -77,7 +77,7 @@ def add_to_blog_index(post):
 
 def add_to_sitemap(post):
     xml = SITEMAP_PATH.read_text(encoding="utf-8")
-    url = f"{BASE}/blog/{post['slug']}.html"
+    url = f"{BASE}/blog/{post['slug']}"
     if url in xml:
         return
     entry = (
