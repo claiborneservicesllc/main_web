@@ -1,0 +1,48 @@
+name: Cleanup root strays (one-time)
+
+# Removes the files that were accidentally flattened to the repo root
+# during a zip upload. Trigger manually from the Actions tab.
+# Run once with mode=dry-run to preview, then again with mode=delete.
+
+"on":
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "dry-run = preview only, delete = actually remove files"
+        required: true
+        default: "dry-run"
+        type: choice
+        options:
+          - dry-run
+          - delete
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run cleanup
+        run: |
+          if [ "${{ inputs.mode }}" = "delete" ]; then
+            python3 scripts/cleanup_root_strays.py
+          else
+            python3 scripts/cleanup_root_strays.py --dry-run
+          fi
+
+      - name: Commit and push
+        if: ${{ inputs.mode == 'delete' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "Nothing was deleted -- nothing to commit."
+          else
+            git add -A
+            git commit -m "chore: remove stray root-level duplicates from zip upload"
+            git push
+          fi
