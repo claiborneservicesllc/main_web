@@ -30,7 +30,7 @@
   });
 </script>
 <!-- Google tag (gtag.js) — GA4 Measurement ID -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5PKEJRFZXC"></script>
+<script>(function(){var l=false;function g(){if(l)return;l=true;var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id=G-5PKEJRFZXC";document.head.appendChild(s);["pointerdown","keydown","scroll","touchstart"].forEach(function(e){window.removeEventListener(e,g)});}["pointerdown","keydown","scroll","touchstart"].forEach(function(e){window.addEventListener(e,g,{once:true,passive:true})});setTimeout(g,4000);})();</script>
 <script>
   gtag('js', new Date());
   gtag('config', 'G-5PKEJRFZXC');
@@ -48,8 +48,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"></noscript>
 <link rel="stylesheet" href="assets/css/styles.css">
 <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
@@ -398,7 +397,7 @@
         </div>
       </div>
       <div>
-        <h4>Services</h4>
+        <p class="footer-heading">Services</p>
         <ul>
           <li><a href="/services/tree-services">Tree Services</a></li>
           <li><a href="/services/land-clearing">Land Clearing</a></li>
@@ -413,7 +412,7 @@
         </ul>
       </div>
       <div>
-        <h4>Service Area</h4>
+        <p class="footer-heading">Service Area</p>
         <ul>
           <li><a href="/">Franklin</a></li>
           <li><a href="/tree-service-brentwood-tn/">Brentwood</a></li>
@@ -426,7 +425,7 @@
         </ul>
       </div>
       <div>
-        <h4>Resources</h4>
+        <p class="footer-heading">Resources</p>
         <ul>
           <li><a href="/faq">FAQs</a></li>
           <li><a href="/blog/">Blog</a></li>
@@ -440,7 +439,7 @@
         </ul>
       </div>
       <div>
-        <h4>Company &amp; Contact</h4>
+        <p class="footer-heading">Company &amp; Contact</p>
         <ul>
           <li><a href="/about">About</a></li>
           <li><a href="/reviews">Reviews</a></li>
@@ -470,7 +469,7 @@
 <!-- Cookie Consent Banner -->
 <div id="cc-banner" class="cc-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
   <div class="cc-banner__text">
-    We use cookies to understand site traffic and improve your experience. You can accept or decline analytics cookies at any time. <a href="/privacy-policy" style="color:#9cd3ff;">Learn more</a>.
+    We use cookies to understand site traffic and improve your experience. You can accept or decline analytics cookies at any time. <a href="/privacy-policy" style="color:#cfe6ff;text-decoration:underline">Learn more in our privacy policy</a>.
   </div>
   <div class="cc-banner__actions">
     <button type="button" class="cc-btn cc-btn--decline" onclick="ccDecline()">Decline</button>
