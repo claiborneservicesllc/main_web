@@ -67,7 +67,7 @@ html,body{overflow-x:clip}
 .btn--outline:hover{background:var(--forest);color:#fff}
 
 /* header */
-.site-header{position:sticky;top:0;z-index:1000;background:rgba(247,245,240,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.site-header{position:sticky;top:0;z-index:1000;background:rgba(247,245,240,.97);border-bottom:1px solid var(--line)}
 .header-inner{display:flex;align-items:center;justify-content:space-between;height:var(--header-h);gap:14px}
 .brand{display:flex;align-items:center;gap:12px;color:var(--forest-dark);font-weight:700;font-size:1.05rem;letter-spacing:-.01em;flex:0 0 auto;line-height:1.1}
 .brand-name{white-space:nowrap}
@@ -436,13 +436,13 @@ html,body{overflow-x:clip}
    ============================================================ */
 .open-status{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.82rem;color:#F7F5F0;white-space:nowrap}
 .open-status .status-dot{width:9px;height:9px;border-radius:50%;background:#9aa0a6;flex-shrink:0;box-shadow:0 0 0 0 rgba(154,160,166,0)}
-.open-status.is-open .status-dot{background:#34d058;animation:pulseDot 2.4s ease-in-out infinite}
+.open-status.is-open .status-dot{background:#34d058;animation:pulseDot 2.4s ease-in-out infinite;will-change:opacity,transform}
 .open-status.is-closed .status-dot{background:#ff9a3c}
 .open-status.is-open .status-text{color:#A7F0C2}
 .open-status.is-closed .status-text{color:#F0C99A}
 @keyframes pulseDot{
-  0%,100%{box-shadow:0 0 0 0 rgba(52,208,88,.55)}
-  50%{box-shadow:0 0 0 6px rgba(52,208,88,0)}
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.45;transform:scale(.85)}
 }
 @media (max-width:880px){
   .open-status .status-text{display:none}
